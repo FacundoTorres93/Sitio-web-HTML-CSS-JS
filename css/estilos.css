@@ -1,0 +1,666 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root{ /* custom property para que todos los elementos puedan acceder a estas propiedades */
+    --padding-container: 100px 0; /*100px arriba y 0 a los lados*/
+    --color-title: #001a49;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    width: 90%; /*para que no ocupe el 100% de la page*/
+    max-width: 1200px; /*Ancho máximo*/
+    margin: 0 auto; /* width se centre verticalemente */
+    overflow: hidden; /*todo lo que se salga de ese elemento container se oculte */
+    padding: var(--padding-container); /*hace referencia al :root , es decir tendra paddin arriba y abajo de 100px y 0 izq a der*/
+}
+
+.hero{
+    width: 100%;/*este es el 100% del navegador y pongamos la img de fondo*/
+    height: 100vh;/*100% del alto de la pantalla*/
+    min-height: 600px;
+    max-height: 800px;
+    position: relative;/*para que un elemento se posicione absolutamente al contenedor*/
+    display: grid; /*para crear dos filas, se pone en la segunda linea de css, abajo*/
+    grid-template-rows: 100px 1fr; /*1era final de 100px y la segunda 1fraccion para que tome el contenido sobrante luego de los 100px*/
+    color: #fff;
+}
+
+.hero::before{ /*pseudoelemto para imagen de fondo*/
+content: " ";
+position: absolute; /*posicionamiento a su padre que es hero arriba*/
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: linear-gradient(180deg,#0000008c 0%, #0000008c 100% ), url(../images/computer.jpg);/*capa de trasparencia a la imagen*/
+background-size: cover; /* para que se adapete a la pagina*/
+clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%); /*https://bennettfeely.com/clippy/ aca le dinmos la forma a la imagen con la pagina*/
+z-index: -1; /*para que se visualcice el texto*/
+} 
+
+/* NAV */
+.nav{
+    --padding-container:0; /*propiedad personalizada o custom pro, sea de cero para la etiqiueta nav y no sea afectada por el :root*/
+    height: 100px; /* o 100% que es lo mismo */
+    display: flex; /*para poner a los elementos UNO AL LADO DEL OTRO*/
+    align-items: center; /* para centrar verticalmente*/
+}
+
+.nav__title{
+    font-weight: 300; /*PESO DE FUENTE MAS DELGADO*/
+}
+
+.nav__link{ /*UL elemento hijo*/
+    margin-left: auto; /*eso logra que el ul lista se pase a la derecha, esto pasa pq usamos FLEXBOX*/
+    padding: 0;/*las listas tienen padding*/
+    display: grid; /*seria la cuadricula de renglenes, lo vemos en la consola con layout o impecianamos*/
+    grid-auto-flow: column ; /*para que su flujo se en columnas*/
+    grid-auto-columns: max-content; /*le sacamos el maximo de su contenido*/
+    gap: 2em ; /*brecha o espaciado de cala elemento ul*/
+}
+
+.name__items{ /*LI, seria el elemento padre de UL*/
+list-style: none; /*quitamos el estilo de lista li*/
+}
+
+
+.nav__links{ /*etiqueta A de inicio, acerca de etc*/
+color: #fff;
+text-decoration: none;
+}
+
+.nav__menu{ /*icono*/
+    margin-left: auto;
+    cursor: pointer; /* cada vez que pase el mouse se active el cursos*/
+    display: none; /*para que desaparezca, IMPORTANTE no queremos verlo hasta que estemos en dispositivos moviles*/
+}
+
+.nav__img{
+    display: block;
+    width: 30px; /*le hace a la imagen dentro del div de esta clase hija*/
+}
+
+.nav__close{ /*icono*/
+    display: var(--show, none); /*custom property --show, none para que desaparezca y solo se mueste en dispositivos*/
+}
+
+
+/* HERO CONTAINER, ABAJO DE NAV*/
+
+.hero__container{ /*contenedor de la section*/
+max-width: 800px; /*ancho maximo*/
+--padding-container: 0; /*quitamos el root del inicio con las propiedad prescriptas*/
+display: grid;
+grid-auto-rows: max-content; /*le sacamos el maximo de su contenido a las filas*/
+align-content: center; /*hacemos que el conteido se alinie verticualmente*/
+gap: 1em; /* gap es espaciado Recordar*/
+padding-bottom: 100px; /*esto es para que no se pegue al recorte*/
+text-align: center;
+}
+
+.hero__title{ 
+    font-size: 3em;
+}
+
+.hero__paragrap{
+    margin-bottom: 20px;
+}
+
+.cta{ /*etiqueta a*/
+    display: inline-block; /*se ajusta*/
+    background-color: #2091f9;
+    justify-self: center; /* lo justificamos al comienzo*/
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 30px; /*arriba abajp, izq derc*/
+    border-radius: 32px;
+}
+
+/*SECTION ABOUT*/
+
+.about{
+    text-align: center; /*todos los elementos que esten en about section se centren*/
+}
+
+.subtitle{
+    color: var(--color-title); /*le damos el color de la custom property root*/
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.about__paragraph{
+    line-height: 1.7; /*establecer la distancia entre líneas de texto*/
+}
+
+.about__main{/*ese es el div de obout icons tanto article como img*/
+    padding-top: 80px; /* poco mas espcacioado con el parrafo*/
+    display: grid;
+    width: 90%;
+    margin: 0 auto;
+    gap: 1em;
+    overflow: hidden;/*todo lo que salga se esconda */
+    grid-template-columns: repeat(auto-fit, minmax(260px,auto));/*creamos columnas dinaminas, repetimos tantas columnas como sea posible con minimo y un max auto, esto hace que sea responsive, todo ellos con css grid */
+}
+
+.about__icons{ /*cada article*/
+    display: grid;
+    gap: 1em; /*espaciado en cada elemento del articulo que seria cada grid o filas, con impeccionar lo podemos ver*/
+    justify-items: center; /*centramos horizontal*/
+    width: 260px;
+    overflow: hidden;/*para que todo lo que salga de ese elemento se oculte*/
+    margin: 0 auto; /*esto hace que se centro*/
+}
+
+.about__icon{/*es la imagen dentro del article*/
+width: 40px  ;
+}
+
+/*empesamos con la section KNOWLEDGE*/
+
+.knowledge{ /* Lo sacamos de la pagina magicpattern.design/tools/css-backgrounds SON backgrounds CON PATRONES */
+background-color: #e5e5f7;
+/* opacity: 0.8; */
+background-image:  radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+background-size: 20px 20px;
+background-position: 0 0,10px 10px;
+overflow: hidden; /*agregamos el oculto*/
+}
+
+.knowledge__container{/* es el contenedor de toda la section knowledge */
+display: grid;
+grid-template-columns: 1fr 1fr; /*1 fraccion cada columna*/
+gap: 1em ;/*separador*/
+align-items: center;
+}
+
+.knowledge__picture{
+    max-width: 500px; /*eso limitara la imagen */
+}
+
+.knowledge_paragraph{
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.knowledge__img{
+    width: 100%; /*la imageen debe ocupar 100% de su padre que es la de picture*/
+    display: block; /*para eviar problemas con espacios verticales*/
+}
+
+/* LIST PRICE*/
+
+.price{
+    text-align: center;
+}
+
+.price__table{ /*contenedor de las tablas*/
+padding-top: 60px;
+display: flex;
+flex-wrap: wrap; /*en caso de que no entren los elementos se va a desbordar,  a propiedad flex-wrap de CSS especifica si los elementos "hijos" son obligados a permanecer en una misma línea */
+gap:2.5em ;
+justify-content: space-evenly;/*para dar un espacio equitativamente hacia todas las esquinas horizontal*/
+align-items: center; /*para centrar verticalmente*/
+}
+
+.price__element{
+    background-color: #e5e5f7;
+    text-align: center;
+    border-radius: 10px;
+    width: 330px;
+    padding: 40px;
+    --color-plan: #696871; /*creamos custom propertis o Propiedades Personalizadas*/
+    --color-price: #1D293F;
+    --bg-cta:#fff;
+    --color-cta: #5454d4;
+    --color-items:#696871;
+}
+
+.price__elemen--best{ /*clase modificadora del segundo div o bloque*/
+    width: 370px; /*para que la caja naranja sea mas grande*/
+    padding: 60px 40px;
+    background-color: #ff7143;
+    --color-plan: rgb(255 255 255 /75%); /* cuando ponemos la / es transparencia*/
+    --color-price: #fff;
+    --bg-cta: #9f3919;
+    --color-cta: #fff;
+    --color-items:#fff;
+}
+
+.price__name{
+    color: var(--color-plan);/*custom properties*/
+    margin-bottom: 15px ;
+    font-weight: 300;
+}
+
+.price__price{
+    font-size: 2.5rem;
+    color: var(--color-price);/*custom properties*/
+}
+
+.price__items{
+    margin-top: 35px;
+    display: grid;/*solamente para dar un espaciado luego con el gap*/
+    gap: 1em ;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: var(--color-items); /*custom property*/
+}
+
+.price__cta{
+    display: block;/*para que ocupe todo el ancho*/
+    padding: 20px 0;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600; /*peso de fuente*/
+    box-shadow: 0 0 1px rgb(0,0,0,.5);
+    background-color: var(--bg-cta); /*custom property*/
+    color: var(--color-cta);
+}
+
+/*Testimony slaider*/
+
+.testimony{
+    background-color: #e5e5f7;
+
+}
+
+.testimony__container{
+    display: grid;
+    grid-template-columns: 50px 1fr 50px ;
+    gap: 1em;
+    align-items: center;
+}
+
+.testimony__body{
+    display: grid;
+    grid-template-columns: 1fr max-content; /*tenemos dos columnas, la caja de texto y la imagen*/
+    justify-content: space-between; /*para que el contenido se vaya a las esquinas*/
+    align-items: center;
+    gap: 2em ;
+    grid-column: 2/3;    /*se rompen las otras imgs entonces aplicamos grid colum, que empiece en la segunda linea de colum y termine en la tercera*/
+    grid-row: 1/2; /*que empieza en la primera linea de filas y termina en la segunda*/
+    opacity: 0; /*opacidad en 0*/
+    pointer-events: none; /*para que no podamos pasar el mouse o seleccionarlo*/
+}
+
+.testimony__body--show{
+    pointer-events: unset; /*para que vaya  a la propiedad original*/
+    opacity: 1;
+    transition: opacity 1.5s ease-in-out; /*pasamos la transicion para opacity y se mostrada en la primera img, las otras img con JS*/
+}
+
+.testimony__img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover; /*para que cubra toda la imagen*/
+    object-position: 50% 30%; /*50 centrada y un 30 en Y*/
+}
+
+.testimony__text{
+    max-width: 700px ; /*para que no revase el año*/
+}
+
+.testimony__course{
+    background-color: royalblue;
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+}
+
+.testimony_arrow{
+    width: 90%;
+    cursor: pointer; /*cuando pasemos el mouse*/
+}
+
+
+/*QUESTIONS*/
+
+.questions{
+    text-align: center;
+}
+
+.questions__container{
+    display: grid;
+    gap: 2em  ; 
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.questions_padding{
+    padding: 0;
+    transition: padding .3s;
+    border: 1px solid #5454d4;
+    border-radius: 6px;
+}
+
+.questions_padding--add{
+    padding-bottom: 30px;
+}
+
+.questions__answers{
+    padding: 0 30px 0 ; /*a la izquierda y a la derecha*/
+    overflow: hidden; /*el question show p desaparece   */
+    font-size: 20px;
+}
+
+.questions__title{
+    text-align: center;
+    display: flex;
+    padding: 30px 0 30px ; /*arriba y abajo*/
+    cursor: pointer;
+    color: var(--color-title);
+    justify-content: space-between; /*para mandarlo a la esquina*/
+}
+
+.questions__arrow{
+    border-radius: 50%;
+    background-color: var(--color-title);
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end; /*para mandarlo al final */
+    margin-left: 10px;
+    transition: transform .3s;
+}
+
+.questions__arrow--rotate{/*Modificador*/
+    transform: rotate(180deg);
+}
+
+.questions__show{ /*parrafo*/
+    text-align: left;
+    height: 0; /*para crear mostrar texto con js*/
+    transition: height .3s; 
+}
+
+.questions__img{
+    display: block;
+}
+
+.questions__copy{ /*parrafo*/
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+/*FOOTER*/
+
+.footer{
+    background-color: #1d293f;
+}
+
+.footer_title{
+    font-weight: 300;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.footer_title .footer__newsletter{
+    color: #fff;
+}
+
+.footer__container{
+    display: flex; /*se pone elemento uno al lado del otro*/
+    justify-content: space-between;/*para que cada elemento de la lista se peguen a las esquinas*/
+    align-items: center; /*y para que se centren verticalmente */
+    border-bottom: 1px solid #fff ;
+    padding-bottom: 60px;
+}
+
+.nav--footer{
+    padding-bottom: 20px;
+    display: grid;
+    gap: 1em;
+    grid-auto-flow: row; /*en filas*/
+    height: 100%;
+}
+
+.nav__link--footer{
+    display: flex;/*de grid para a ser flexible*/
+    margin: 0;/*quitamos los margenes */
+    margin-right: 20px;
+    flex-wrap: wrap; /*por si en algun punto  los enlances no entran en una misma linea se desborden */
+}
+
+.footer__inputs{ /*clase padre con s*/
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+.footer__input{/*clase hijo sin la s*/
+    background-color: #fff;
+    height: 50px;
+    display: block;
+    padding-left: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none; /*contorno*/
+    border: none;
+    margin-right: 16px;
+}
+
+.footer__submit{
+    margin-left: auto; /*para que lo mande a la derecha*/
+    display: inline-block;
+    height: 50px;
+    padding: 0 20px; /*20px izquieda y derecha y 0 arriba y abajo*/
+    background-color: #2091f9;
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.footer__copy{
+    --padding-container: 30px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.footer__copyright{
+    font-weight: 300;
+    padding-bottom: 20px;
+}
+
+.footer__icons{
+    /* display: inline-flex; cada elemento a en linea uno al lado del otro horizontal, si fuera flex se pone vertical */
+    margin-bottom: 10px ;
+}
+
+.footer__img{
+    width: 30px;
+}
+
+/*Adaptando a dispositivos moviles con MEDIA QUERIES*/
+
+@media(max-width: 800px){ /*A partir de los 800 px empecemos a cambiar el layout, pasamos al navegador */
+    .nav__menu{
+        display: block; /*se muestra el icono de la hamburguesa menu*/
+    }
+
+    .nav__link--menu{
+        position: fixed;
+        background-color: #000;
+        top: 0;
+        left: 0; /*para que se posiciones en la parte superior izquierda */
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column; /*direccion en columna de manera vertical*/
+        justify-content: space-evenly; /*verticalemente reparta el espacio equitativamente */
+        align-items: center; /*luego centrarlo horizontalmente*/
+        z-index: 100; /*para que se sobreponga a todo el contenido*/
+        opacity: 0;
+        pointer-events: none; /*para que no reconozca el mouse*/
+        transition: 0.7s opacity;
+    }
+    
+    .nav__link--show {/*creamos clase extra modificadora*/
+        --show: block; /*es de la clase nav__close custom property, block para que muestre los elementos*/
+        opacity: 1; /*cambiamos la opacity de 0 a 1, de la class nav link*/
+        pointer-events: unset;/* para que vuelva al valor original en relacion a la class padre anterior*/
+
+    }
+
+    .nav__close{
+        position: absolute; /*para posicionar a la derecha*/
+        top: 30px;
+        right: 30px; /*para correr icono a la derecha*/
+        width: 30px;
+        cursor: pointer; /*para que cada vez que pasemos el mouse sobre el elemtno se active el cursor*/
+    }
+
+    .hero__title{
+        font-size: 2.5rem;
+    }
+
+    .about__main{
+        gap: 2em;
+    }
+
+    .about__icons:last-of-type{
+        grid-column: 1/-1;
+    }
+    
+
+    .knowledge__container{
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content 1fr;
+        gap: 3em;
+        text-align: center;
+    }
+
+    .knowledge__picture{
+        grid-row: 1/2;
+        justify-self: center;
+    }
+
+    .testimony__container{
+        grid-template-columns: 30px 1fr 30px;
+    }
+
+    .testimony__body{
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content;
+        gap: 3em;
+        justify-items: center;
+    }
+
+    .testimony__img{
+        width: 200px;
+        height: 200px ;
+    }
+
+    .questions__copy{
+        width: 100%;
+    }
+
+    .footer__container{
+        flex-wrap: wrap;/*para que se desborde a otra linea*/
+    }
+
+    .nav--footer{
+        width: 100%;
+        justify-items:center ;
+    }
+
+    .nav__link--footer{
+        width: 100%;
+        justify-content: space-evenly; /*reparte espacio equitativamente*/
+        margin: 0;
+    }
+
+    .footer__input{
+        flex: 1;
+    }
+}
+
+@media (max-width:600px){
+    .hero__title{
+        font-size: 2rem;
+    }
+
+    .hero__paragrap{
+        font-size: 1rem;
+    }
+
+    .subtitle{
+        font-size: 1.8rem;
+    }
+
+    .price__element{
+        width: 90%;
+    }
+
+    .price__elemen--best{
+        width: 90%;
+        /* padding: 40px; */
+    }
+
+    .price__price{
+        font-size: 2rem;
+    }
+
+    .testimony{
+        --padding-container:60px 0;
+    }
+
+    .testimony__container{
+        grid-template-columns: 28px 1fr 28px;
+        gap: .9em;
+    }
+
+    .testimony_arrow{
+        width: 100%;
+    }
+
+    .testimony__course{
+        margin-top: 15px;
+    }
+
+    .questions__title{
+        font-size: 1rem;
+    }
+
+    .footer_title{
+        justify-self: start;
+        margin: 15px;
+    }
+
+    .nav--footer{
+        padding: 0;
+    }
+
+    .footer__inputs{
+        flex-wrap: wrap;
+        padding-bottom: 60px;
+    }
+
+    .footer__input{
+        flex-basis: 100%;
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+    .nav__link--footer{
+        justify-content: space-between;
+    }
+
+    .footer__submit{
+        margin-right: auto;/*para que se pase a la izquierda */
+        margin-left: 0; 
+
+        /*otra opcion 
+        width: 100%;
+        margin: 0;*/
+    }
+}
